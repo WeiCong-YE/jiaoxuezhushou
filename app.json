@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/message/message",
+    "pages/my/my"
+  ],
+  "window": {
+    "backgroundColor": "#31a030",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4bbc93",
+    "navigationBarTitleText": "课堂助手",
+    "navigationBarTextStyle": "light"
+  }
+}
