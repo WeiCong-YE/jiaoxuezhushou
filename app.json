@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/message/message",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/index-course/course",
+    "pages/file_browser/file_browser"
   ],
   "window": {
     "backgroundColor": "#31a030",
@@ -11,5 +13,31 @@
     "navigationBarBackgroundColor": "#4bbc93",
     "navigationBarTitleText": "课堂助手",
     "navigationBarTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#31a030",
+    "backgroundColor": "#FFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab_index1.png",
+        "selectedIconPath": "images/tab_index2.png"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "消息",
+        "iconPath": "images/tab_message1.png",
+        "selectedIconPath": "images/tab_message2.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/tab_my1.png",
+        "selectedIconPath": "images/tab_my2.png"
+      }
+    ]
   }
 }

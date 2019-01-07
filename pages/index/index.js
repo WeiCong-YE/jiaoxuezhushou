@@ -7,7 +7,23 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+
+    currentTab: 0,
+    studied:[
+      {
+        url:"../index-course/course",
+        imgurl:"/images/course.jpg",
+        title:"语文",
+        state:"本次开课已经结束",
+      },
+      {
+        url: "../index-course/course",
+        imgurl: "/images/course.jpg",
+        title: "语文",
+        state: "本次开课已经结束",
+      }
+    ]
   },
   //事件处理函数
   bindViewTap: function() {
@@ -50,5 +66,42 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  add_pressed:function(e){
+    wx.showActionSheet({
+      itemList: ['创建课程', '加入班级',],
+      success(res) {
+        console.log(res.tapIndex)
+        switch (res.tapIndex){
+          case 0:
+
+          break;
+          case 1:
+
+          break;
+        }
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
+  //点击切换 
+  clickTab: function (e) {
+    var that = this;
+    if (this.data.currentTab === e.target.dataset.current) { return false; }
+    else {
+      that.setData({ currentTab: e.target.dataset.current })
+    }
+  },
+     //滑动切换 
+   swiperTab: function (e) {
+    var that = this;
+    that.setData(
+      {
+        currentTab: e.detail.current
+      }
+    );
   }
+  ,
 })

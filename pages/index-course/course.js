@@ -1,11 +1,37 @@
-// pages/message/message.js
+// pages/index-course/course.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentTab: 0,
+    navigators:[
+      {
+        text:"课程学习",
+        imageUrl:"/images/learn.png",
+        navigateTo:"",
+    },
+      {
+        text: "课程文件",
+        imageUrl: "/images/file.png",
+        navigateTo: "",
+      },
+      {
+        text: "课程作业",
+        imageUrl: "",
+        navigateTo: "",
+      },
+      {
+        text: "基本信息",
+        imageUrl: "",
+        navigateTo: "",
+      },
+      {
+        text: "交流答疑",
+      imageUrl: "",
+        navigateTo: "",
+      },
+    ]
   },
 
   /**
@@ -63,26 +89,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-  ,
-   //滑动切换 
-   swiperTab: function (e) { 
-     var that = this; 
-     that.setData(
-       {
-        currentTab: e.detail.current
-      }
-    ); 
-    }
-  ,
-    //点击切换 
-  clickTab: function (e) { 
-    var that = this; 
-    if (this.data.currentTab === e.target.dataset.current)
-     { return false; } 
-     else 
-     { 
-       that.setData({ currentTab: e.target.dataset.current }) 
-     } 
-  }
-
 })

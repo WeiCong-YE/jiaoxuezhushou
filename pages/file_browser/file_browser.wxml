@@ -1,0 +1,7 @@
+<!--pages/file_browser/file_browser.wxml-->
+<!-- <text>pages/file_browser/file_browser.wxml</text> -->
+<view class="weui-panel">
+  <block wx:for="{{navigators}}" wx:for-item="item">
+     <template is="navigator" data="{{item}}"/>
+  </block>
+</view>

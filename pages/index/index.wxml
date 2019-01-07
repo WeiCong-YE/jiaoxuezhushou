@@ -1,4 +1,5 @@
 <!--index.wxml-->
+<import src="/templates/templates.wxml"/>
 <view class="container">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -10,4 +11,36 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+
+      <view class="body">
+       <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">我教的课</view>
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">我听的课</view>
+  
+    <button class="swiper-tab-item" bindtap='add_pressed'>+</button>
+</view>
+   <view class="flex downTitle">
+            <text>{{downTitle_left}}</text>
+            <text>{{downTitle_right}}</text>
+        </view>
+<swiper current="{{currentTab}}" duration="300"  bindchange="swiperTab">
+    <swiper-item ><view>通知</view>
+    
+    </swiper-item>
+
+    <swiper-item>
+  
+        <block wx:for="{{studied}}" wx:for-item="item">
+             <template is="courseNavigator" data="{{item}}"/>
+        </block>
+    
+    
+    </swiper-item>
+    
+   
+</swiper>
+
+       
+    </view>
+    
 </view>

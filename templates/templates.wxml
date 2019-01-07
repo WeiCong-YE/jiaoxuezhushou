@@ -1,0 +1,26 @@
+<template name="navigator">
+<navigator url="{{item.navigatorTo}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+        <block wx:if="{{item.imageUrl!=''}}">
+        <image src="{{item.imageUrl}}" style="width: 20px;height: 20px;margin-right: 5px;margin-top: 10px;" />
+        </block>
+        </view>
+                                
+        <view class="weui-cell__bd weui-cell_primary">
+          <view>{{item.text}}</view>
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">
+        </view>
+     </navigator>
+</template>
+
+<template name="courseNavigator">
+<navigator url="{{item.url}}" class="course flex">
+                <image src="{{item.imgurl}}"></image>
+                <view class="SdyInfo flex">
+                    <text>{{item.title}}</text>
+                    <text>{{item.state}}</text>
+                </view>
+            </navigator>
+
+</template>
