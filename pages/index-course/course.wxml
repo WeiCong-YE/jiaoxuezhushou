@@ -4,8 +4,8 @@
 <view class="page__hd" >
         <!-- <image src="/images/course_background.jpg"></image> -->
 
-        <view class="page__title">XX课程</view>
-        <view class="page__desc">面板</view>
+        <view class="page__title">{{predata.name}}</view>
+        <view class="page__desc">{{predata.desc}}</view>
 </view>
 <view class="weui-panel">
   <block wx:for="{{navigators}}" wx:for-item="item">

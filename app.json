@@ -4,8 +4,11 @@
     "pages/logs/logs",
     "pages/message/message",
     "pages/my/my",
+    "pages/course-sign/sign",
+    "pages/bind/bind",
     "pages/index-course/course",
-    "pages/file_browser/file_browser"
+    "pages/file_browser/file_browser",
+    "pages/about/about"
   ],
   "window": {
     "backgroundColor": "#31a030",

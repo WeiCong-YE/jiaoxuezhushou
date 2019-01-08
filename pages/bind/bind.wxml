@@ -1,0 +1,54 @@
+<!--pages/bind/bind.wxml-->
+<view  class=''>
+<form bindsubmit='formSubmit' bindreset='formReset'>
+  <!-- <view class="inputView">
+    <input class='input'  name="studentID" placeholder='请输入学号'></input>
+  </view>
+  <view class="inputView" >
+    <input class='input' name="studentName" placeholder='请输入名字'></input>
+  </view> -->
+          <view class="weui-cells__title">用户信息</view>
+        <view class="weui-cells weui-cells_after-title">
+<view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">姓名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="Name" placeholder="请输入姓名"/>
+                </view>
+            </view>
+
+<view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">ID</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="ID" placeholder="请输入编号"/>
+                </view>
+            </view>
+
+
+
+
+ <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">身份</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="bindUserTypeChange" name="Type" value="{{userTypeIndex}}" range="{{userTypes}}">
+                        <view class="weui-select weui-select_in-select-after">{{userTypes[userTypeIndex]}}</view>
+                    </picker>
+                </view>
+                </view>
+
+
+
+        </view>
+
+
+ 
+  <view class='btn-area'>
+  <button form-type='submit'>绑定</button>
+  </view>
+</form>
+</view>

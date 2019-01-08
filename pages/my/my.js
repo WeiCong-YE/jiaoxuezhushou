@@ -22,12 +22,12 @@ Page({
       {
         text: "身份绑定",
         imageUrl: "",
-        navigateTo: "",
+        navigateTo: "../bind/bind",
       },
       {
         text: "签到",
         imageUrl: "",
-        navigateTo: "",
+        navigateTo: "../course-sign/sign",
       },
       {
         text: "关于",

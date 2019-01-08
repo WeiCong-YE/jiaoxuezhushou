@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+var util = require('../../utils/util.js');      //引用外部的js文件
 
 Page({
   data: {
@@ -14,13 +15,13 @@ Page({
       {
         url:"../index-course/course",
         imgurl:"/images/course.jpg",
-        title:"语文",
+        name:"语文",
         state:"本次开课已经结束",
       },
       {
         url: "../index-course/course",
         imgurl: "/images/course.jpg",
-        title: "语文",
+        name: "语文",
         state: "本次开课已经结束",
       }
     ]
@@ -32,32 +33,75 @@ Page({
     })
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    //mrequest_getAndSetdata(that,subUrl, pos, postData,callbackfunc) {
+    util.mrequest_withSetdata(this, "get_mycourse","studied",{},function(data,index){
+      data["url"] = "../index-course/course?pos=studied&index="+index
+      data["imgurl"] ="/images/course.jpg"
+      data["state"] = "state"
+      return data;
+    })
+    
+  
+    // var that=this;
+    // util.mrequest("teacher/get_mycourse", function (res) {
+    //   console.log("request successs" + res.data['errCode'] + " " + res.data["returnValue"])
+    //   if (res.data["returnValue"] == 1) {//bind success
+    //     var retData = JSON.parse(res.data["returnData"])
+    //     console.log(retData)
+    //     var showData = []
+    //     for (var index = 0; index < retData.length; index++) {//写一个传入json传出json的
+    //       var courseID = util.jsonPK(retData[index], "courseID")
+    //       var courseName = util.jsonFields(retData[index], "courseName")
+    //       var courseCreator = util.jsonFields(retData[index], "courseCreator")
+    //       var count = util.jsonFields(retData[index], "count")
+
+    //       showData.push({
+    //         courseID: courseID,
+    //         courseName: courseName,
+    //         courseCreator: courseCreator,
+    //         count: count,
+    //         open: false,
+    //       })
+    //     }
+    //     that.setData({
+    //       courses: showData
+    //     })
+    //     for (var index = 0; index < that.data.courses.length; index++) {
+    //       (function (index) {
+    //         loadAssignments(that.data.courses[index].courseID, that, index)
+    //       })(index)
+    //     }
+    //   } else {
+    //     console.error("request fail")
+    //   }
+
+    // }, {})
+    // if (app.globalData.userInfo) {
+    //   this.setData({
+    //     userInfo: app.globalData.userInfo,
+    //     hasUserInfo: true
+    //   })
+    // } else if (this.data.canIUse){
+    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //   // 所以此处加入 callback 以防止这种情况
+    //   app.userInfoReadyCallback = res => {
+    //     this.setData({
+    //       userInfo: res.userInfo,
+    //       hasUserInfo: true
+    //     })
+    //   }
+    // } else {
+    //   // 在没有 open-type=getUserInfo 版本的兼容处理
+    //   wx.getUserInfo({
+    //     success: res => {
+    //       app.globalData.userInfo = res.userInfo
+    //       this.setData({
+    //         userInfo: res.userInfo,
+    //         hasUserInfo: true
+    //       })
+    //     }
+    //   })
+    // }
   },
   getUserInfo: function(e) {
     console.log(e)

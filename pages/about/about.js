@@ -1,50 +1,18 @@
-// pages/index-course/course.js
-var util = require('../../utils/util.js');      //引用外部的js文件
+// pages/about/about.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    navigators:[
-      {
-        text:"课程学习",
-        imageUrl:"/images/learn.png",
-        navigateTo:"",
-    },
-      {
-        text: "课程文件",
-        imageUrl: "/images/file.png",
-        navigateTo: "../file_browser/file_browser?pos=predata",
-      },
-      {
-        text: "课程作业",
-        imageUrl: "",
-        navigateTo: "",
-      },
-      {
-        text: "基本信息",
-        imageUrl: "",
-        navigateTo: "",
-      },
-      {
-        text: "签到记录",
-        imageUrl: "",
-        navigateTo: "",
-      },
-      {
-        text: "交流答疑",
-        imageUrl: "",
-        navigateTo: "",
-      },
-    ]
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    util.loadUrlPara(this,options)
+
   },
 
   /**
