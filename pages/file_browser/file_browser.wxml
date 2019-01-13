@@ -1,7 +1,23 @@
 <!--pages/file_browser/file_browser.wxml-->
 <!-- <text>pages/file_browser/file_browser.wxml</text> -->
+<import src="/templates/templates.wxml"/>
 <view class="weui-panel">
-  <block wx:for="{{navigators}}" wx:for-item="item">
+  <block wx:for="{{files}}" wx:for-item="item">
+
+  <block wx:if="{{item.fileType=='folder'}}">
      <template is="navigator" data="{{item}}"/>
+  </block>
+  
+<block wx:else>
+
+<block wx:if="{{i.imageUrl=='/images/files/file.png'}}">
+ <template is="files" data="{{item}}"/>
+</block>
+
+<block wx:else>
+ <template is="files" data="{{item}}"/>
+</block>
+
+</block>
   </block>
 </view>

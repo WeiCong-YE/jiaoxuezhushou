@@ -22,6 +22,7 @@ module.exports = {
   mrequest_withSetdata: mrequest_withSetdata,
   mrequest_withoutSetdata: mrequest_withoutSetdata,
   loadUrlPara: loadUrlPara,
+  mrequest_withSetaList: mrequest_withSetaList,
 }
 
 
@@ -96,7 +97,35 @@ function mrequest_withSetdata(that,subUrl, pos, postData,eachFunc,callbackfunc) 
 
   }, postData)
 }
+function mrequest_withSetaList(that, subUrl, pos, postData, eachFunc, callbackfunc) {
+  mrequest(wx.getStorageSync('loginStatus') + "/" + subUrl, function (res) {
+    console.log("request successs" + res.data['errCode'] + " " + res.data["returnValue"])
+    if (res.data["returnValue"] == 1) {//bind success
+      var retData = JSON.parse(res.data["returnData"])
+      console.log(retData)
+      var showData = []
+      for (var index = 0; index < retData.length; index++) {//写一个传入json传出json的
+        // var courseID = util.jsonPK(retData[index], "courseID")
+        // var courseName = util.jsonFields(retData[index], "courseName")
+        // var courseCreator = util.jsonFields(retData[index], "courseCreator")
+        // var count = util.jsonFields(retData[index], "count")
+        var data = retData[index]
+        data = eachFunc(data, index)
 
+        showData.push(data)
+      }
+      that.setData({
+        [pos]: showData
+      })
+      if (typeof callbackfunc == 'function') {
+        callbackfunc()
+      }
+    } else {
+      console.error("request fail")
+    }
+
+  }, postData)
+}
 //一个包装好的函数用户网络get数据
 function mrequest_withoutSetdata(subUrl, postData, success,fail) {
   mrequest(wx.getStorageSync('loginStatus') + "/"+subUrl, function (res) {

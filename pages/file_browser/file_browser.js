@@ -10,12 +10,13 @@ Page({
 
     },{
 
-    }]
+    }],
+    currentPath:""
     ,
     navigators: [{
       text: "文件夹",
       imageUrl: "/images/learn.png",
-      navigateTo: "",
+      navigateTo: "file_browser?pos=predata",
     },
       {
         text: "word文档",
@@ -43,6 +44,24 @@ Page({
    */
   onLoad: function (options) {
     util.loadUrlPara(this, options)
+    if (this.data.predata.currpath!=null){
+      if (this.data.predata.currpath==""){
+        this.data.predata.currpath = this.data.predata.currpath  + options.folder
+      }else{
+      this.data.predata.currpath = this.data.predata.currpath+"/"+options.folder
+    }
+    }else{
+      this.data.predata.currpath=""
+    }
+    util.mrequest_withSetaList(this, "file_browser", "files", { "courseID": this.data.predata["pk"], "dir": this.data.predata["currpath"] }, function (data, index) {
+      // data["url"] = "../index-course/course?pos=studied&index=" + index
+      data["imageUrl"] = file_extension_to_imgUrl(data["fileType"])
+      data["text"] = data["fileName"]
+      data["navigateTo"] = "file_browser?pos=predata&folder=" + data["fileName"]
+      // data["state"] = "state"
+      return data;
+    })
+
   },
 
   /**
@@ -93,29 +112,65 @@ Page({
   onShareAppMessage: function () {
 
   }
+  ,
+  onOpenFile:function(evnet){
+    var that=this;
+    console.log(evnet.currentTarget.dataset.filename)
+    var filetype = evnet.currentTarget.dataset.filetype
+    var url;
+    if (this.data.predata.currpath!=""){
+      url = this.data.predata.currpath + "/" + evnet.currentTarget.dataset.filename
+      }
+    else{
+      url = evnet.currentTarget.dataset.filename
+    }
+    console.log(wx.getStorageSync('apiServer') + "/" + "file_download?courseID=" + that.data.predata.pk + "&dir=" + url )
+    wx.downloadFile({
+      // 示例 url，并非真实存在
+      url: wx.getStorageSync('apiServer') + "/" + "file_download?courseID="+that.data.predata.pk+"&dir="+url,
+      success(res) {
+        const filePath = res.tempFilePath
+        console.log("下载完成")
+        wx.openDocument({
+          filePath, fileType: filetype.substring(1),
+          success(res) {
+            console.log('打开文档成功')
+          },fail(res){
+            console.log('打开文档失败')
+          }
+        })
+      }
+    })
+
+  }
+  
 })
 function file_extension_to_imgUrl(extension){
   switch(extension){
-    case "txt":
+    case ".txt":
       return "/images/files/txt.png"
-    case "doc":
-    case "docx":
+    case ".doc":
+    case ".docx":
       return "/images/files/word.png"
-    case "xls":
-    case "xlsx":
+    case ".xls":
+    case ".xlsx":
       return "/images/files/excel.png"
-    case "ppt":
+    case ".ppt":
+    case ".pptx":
       return "/images/files/ppt.png"
-    case "pdf":
+    case ".pdf":
       return "/images/files/pdf.png"
-    case "rar":
-    case "zip":
-      return "/images/files/pdf.png"
-    case "bmp":
-    case "jpg":
-    case "png":
-    case "gif":
+    case ".rar":
+    case ".zip":
+      return "/images/files/rar.png"
+   
+    case ".jpg":
+    case ".png":
+    case ".gif":
+    case ".bmp":
       return "/images/files/img.png"
+    case "folder":
+      return "/images/files/folder.png"
     default:
       return "/images/files/file.png"
   }
